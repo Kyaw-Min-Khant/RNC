@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+example/node_modules/
+
+# Build output
+lib/
+
+# Expo
+example/.expo/
+example/dist/
+
+# OS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
