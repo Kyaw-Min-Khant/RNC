@@ -1,7 +1,7 @@
 {
-  "name": "rnc",
-  "version": "0.0.0",
-  "description": "React Native Ui Library",
+  "name": "@kyaw-min-khant/rnc",
+  "version": "1.0.1",
+  "description": "React Native UI library with StyleSheet and NativeWind support",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -20,16 +20,20 @@
     "@types/react-native": "^0.72.0",
     "react": "18.2.0",
     "react-native": "0.76.0",
-    "react-native-builder-bob": "^0.23.0"
+    "react-native-builder-bob": "^0.23.0",
+    "typescript": "^5.0.0"
   },
   "codegenConfig": {
     "name": "RNCSpec",
     "type": "modules",
     "jsSrcsDir": "src"
   },
-  "author": "KMK-MOBILE <kyawminkhant@global-connect.asia> (https://github.com/KMK-MOBILE)",
-  "license": "UNLICENSED",
-  "homepage": "https://github.com/KMK-MOBILE/rnc#readme",
+  "author": "Kyaw Min Khant <kyawminkhant8237@gmail.com> (https://github.com/Kyaw-Min-Khant)",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/Kyaw-Min-Khant",
   "scripts": {
     "build": "bob build",
     "prepare": "bob build",
