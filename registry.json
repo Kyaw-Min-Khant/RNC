@@ -1,0 +1,88 @@
+{
+  "$schema": "https://kyaw-min-khant.dev/rnc/schema/registry.json",
+  "items": {
+    "theme": {
+      "type": "registry:lib",
+      "description": "Theme context and provider used by every component",
+      "file": "theme/ThemeContext.tsx",
+      "targetFileName": "ThemeContext.tsx",
+      "aliasKey": "theme",
+      "originalImportPath": "../../theme/ThemeContext",
+      "dependencies": [],
+      "registryDependencies": []
+    },
+    "utils": {
+      "type": "registry:lib",
+      "description": "cn() class-name merge helper for NativeWind",
+      "file": "utils/cn.ts",
+      "targetFileName": "cn.ts",
+      "aliasKey": "utils",
+      "originalImportPath": "../../utils/cn",
+      "dependencies": [],
+      "registryDependencies": []
+    },
+    "button": {
+      "type": "registry:component",
+      "description": "Button with primary/secondary/outline/ghost variants",
+      "file": "components/buttons/Button.tsx",
+      "targetFileName": "Button.tsx",
+      "aliasKey": "components",
+      "dependencies": [],
+      "registryDependencies": ["theme"]
+    },
+    "floating-action-button": {
+      "type": "registry:component",
+      "description": "FAB with speed-dial and extended-label variants",
+      "file": "components/buttons/FloatingActionButton.tsx",
+      "targetFileName": "FloatingActionButton.tsx",
+      "aliasKey": "components",
+      "dependencies": [],
+      "registryDependencies": ["theme"]
+    },
+    "badge": {
+      "type": "registry:component",
+      "description": "Label/count badge with filled and outline variants",
+      "file": "components/badges/Badge.tsx",
+      "targetFileName": "Badge.tsx",
+      "aliasKey": "components",
+      "dependencies": [],
+      "registryDependencies": ["theme"]
+    },
+    "input": {
+      "type": "registry:component",
+      "description": "Text input with outlined/filled/underlined variants",
+      "file": "components/inputs/Input.tsx",
+      "targetFileName": "Input.tsx",
+      "aliasKey": "components",
+      "dependencies": [],
+      "registryDependencies": ["theme"]
+    },
+    "dropdown": {
+      "type": "registry:component",
+      "description": "Searchable select menu with a Modal-based popup",
+      "file": "components/dropdowns/Dropdown.tsx",
+      "targetFileName": "Dropdown.tsx",
+      "aliasKey": "components",
+      "dependencies": [],
+      "registryDependencies": ["theme", "utils"]
+    },
+    "skeleton": {
+      "type": "registry:component",
+      "description": "Pulsing loading placeholder, rectangular or circle",
+      "file": "components/skeletons/Skeleton.tsx",
+      "targetFileName": "Skeleton.tsx",
+      "aliasKey": "components",
+      "dependencies": [],
+      "registryDependencies": ["theme"]
+    },
+    "date-time-picker": {
+      "type": "registry:component",
+      "description": "Inline month/day/time date & time picker, no external calendar dependency",
+      "file": "components/datetimepicker/DateTimePicker.tsx",
+      "targetFileName": "DateTimePicker.tsx",
+      "aliasKey": "components",
+      "dependencies": [],
+      "registryDependencies": ["theme"]
+    }
+  }
+}

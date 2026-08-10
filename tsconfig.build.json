@@ -1,7 +1,0 @@
-{
-  "extends": "./tsconfig",
-  "compilerOptions": {
-    "declaration": true
-  },
-  "exclude": ["example", "node_modules", "lib"]
-}
