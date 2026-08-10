@@ -1,6 +1,14 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { Button, Dropdown, FloatingActionButton, Input, Badge } from "../../src";
+import { Text, StyleSheet, ScrollView } from "react-native";
+import {
+  Button,
+  Dropdown,
+  FloatingActionButton,
+  Input,
+  Badge,
+  Skeleton,
+  DateTimePicker,
+} from "../../src";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Octicons from "@expo/vector-icons/Octicons";
@@ -10,6 +18,8 @@ import Entypo from "@expo/vector-icons/Entypo";
 export default function App() {
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
+  const [dateTimePickerModal, setDateTimePickerModal] = useState(false);
+  const [date, setDate] = useState<Date>();
   const options = [
     { label: "Option A", value: "a" },
     { label: "Option B", value: "b" },
@@ -25,7 +35,7 @@ export default function App() {
   ];
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <Text style={styles.title}>RNC Component Demo</Text>
+      {/* <Text style={styles.title}>RNC Component Demo</Text>
       <View style={styles.buttonRow}>
         <Button
           title="Primary Button"
@@ -74,9 +84,9 @@ export default function App() {
       </View>
       <View style={styles.buttonRow}>
         <Button title="Disabled" onPress={() => {}} disabled />
-      </View>
+      </View> */}
 
-      <Dropdown
+      {/* <Dropdown
         dropDownRightIcon={
           <Entypo name="chevron-small-down" size={24} color="black" />
         }
@@ -93,9 +103,9 @@ export default function App() {
         onSelect={setSelected}
         label="Custom Dropdown"
         placeholderTextColor="#000000"
-      />
+      /> */}
       {/* ── Input ── */}
-      <Text style={styles.sectionTitle}>Input</Text>
+      {/* <Text style={styles.sectionTitle}>Input</Text>
       <View style={styles.buttonRow}>
         <Input label="Outlined (default)" placeholder="Type something..." />
       </View>
@@ -103,10 +113,18 @@ export default function App() {
         <Input label="Filled" variant="filled" placeholder="Filled style..." />
       </View>
       <View style={styles.buttonRow}>
-        <Input label="Underlined" variant="underlined" placeholder="Underlined style..." />
+        <Input
+          label="Underlined"
+          variant="underlined"
+          placeholder="Underlined style..."
+        />
       </View>
       <View style={styles.buttonRow}>
-        <Input label="With error" placeholder="Bad value" error="This field is required" />
+        <Input
+          label="With error"
+          placeholder="Bad value"
+          error="This field is required"
+        />
       </View>
       <View style={styles.buttonRow}>
         <Input
@@ -115,10 +133,10 @@ export default function App() {
           leftIcon={<MaterialIcons name="search" size={20} color="#6200ee" />}
           rightIcon={<Feather name="x" size={18} color="#999" />}
         />
-      </View>
+      </View> */}
 
       {/* ── Badge ── */}
-      <Text style={styles.sectionTitle}>Badge</Text>
+      {/* <Text style={styles.sectionTitle}>Badge</Text>
       <View style={styles.badgeRow}>
         <Badge label="Primary" color="primary" />
         <Badge label="Secondary" color="secondary" />
@@ -131,9 +149,8 @@ export default function App() {
         <Badge count={5} color="error" />
         <Badge count={120} maxCount={99} color="primary" />
         <Badge label="Large" color="secondary" size="large" />
-      </View>
-
-      <FloatingActionButton
+      </View> */}
+      {/* <FloatingActionButton
         onPress={() => console.log("FAB pressed")}
         icon={<Feather name="plus" color={"#fff"} size={30} />}
         actions={[
@@ -156,7 +173,31 @@ export default function App() {
             onPress: () => console.log("Add pressed"),
           },
         ]}
+      /> */}
+      <Text
+        style={{
+          fontSize: 24,
+        }}
+      >
+        {date?.toLocaleDateString()}
+      </Text>
+      <Button
+        onPress={() => setDateTimePickerModal(true)}
+        title="Date Picker"
       />
+
+      {dateTimePickerModal && (
+        <DateTimePicker
+          onChange={(e) => {
+            setDate(e);
+            setDateTimePickerModal(false);
+          }}
+          mode="time"
+        />
+      )}
+
+      {/* <Skeleton variant="circle" size={100} /> */}
+      {/* <Skeleton height={200} /> */}
     </ScrollView>
   );
 }

@@ -3,7 +3,12 @@ import { View, Text, StyleSheet, ViewStyle, TextStyle } from "react-native";
 import { useTheme, RNCTheme } from "../../theme/ThemeContext";
 
 export type BadgeVariant = "filled" | "outline";
-export type BadgeColor = "primary" | "secondary" | "error" | "success" | "warning";
+export type BadgeColor =
+  | "primary"
+  | "secondary"
+  | "error"
+  | "success"
+  | "warning";
 
 export interface BadgeProps {
   label?: string;
@@ -76,7 +81,11 @@ export function Badge({
   return (
     <View style={[styles.badge, containerStyle, style]}>
       <Text
-        style={[styles.text, { fontSize: sizing.fontSize, color: labelColor }, textStyle]}
+        style={[
+          styles.text,
+          { fontSize: sizing.fontSize, color: labelColor },
+          textStyle,
+        ]}
         numberOfLines={1}
       >
         {displayText}

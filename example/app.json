@@ -11,6 +11,9 @@
     },
     "android": {
       "package": "com.rnc.example"
-    }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

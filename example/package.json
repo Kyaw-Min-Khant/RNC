@@ -5,15 +5,16 @@
   "scripts": {
     "start": "expo start",
     "start:offline": "EXPO_OFFLINE=1 expo start",
-    "android": "expo start --android",
+    "android": "expo run:android",
     "android:offline": "EXPO_OFFLINE=1 expo start --android",
-    "ios": "expo start --ios",
+    "ios": "expo run:ios",
     "ios:offline": "EXPO_OFFLINE=1 expo start --ios"
   },
   "dependencies": {
-    "@expo/vector-icons": "^15.1.1",
+    "@expo/vector-icons": "~14.0.4",
     "expo": "~52.0.0",
     "expo-asset": "~11.0.0",
+    "expo-font": "~13.0.4",
     "expo-status-bar": "~2.0.0",
     "react": "18.2.0",
     "react-native": "0.76.0"

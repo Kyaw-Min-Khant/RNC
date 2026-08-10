@@ -193,7 +193,11 @@ export function FloatingActionButton({
           <View style={styles.extendedContent}>
             {icon}
             <Text
-              style={[styles.extendedLabel, { color: resolvedIconColor }, labelStyle]}
+              style={[
+                styles.extendedLabel,
+                { color: resolvedIconColor },
+                labelStyle,
+              ]}
               numberOfLines={1}
             >
               {label}
