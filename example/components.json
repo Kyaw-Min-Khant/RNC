@@ -1,0 +1,8 @@
+{
+  "$schema": "https://kyaw-min-khant.dev/rnc/schema/components.json",
+  "aliases": {
+    "components": "src/components/ui",
+    "theme": "src/theme",
+    "utils": "src/lib"
+  }
+}

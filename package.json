@@ -1,6 +1,6 @@
 {
   "name": "@kyaw-min-khant/rnc",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "shadcn-style React Native components — copied into your project via CLI, not installed as a runtime dependency",
   "bin": {
     "rnc": "./bin/rnc.js"

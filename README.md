@@ -39,7 +39,7 @@ npx @kyaw-min-khant/rnc init
 npx @kyaw-min-khant/rnc add button
 ```
 
-`init` asks where you want components, the theme, and utilities placed in your project, and writes those choices to a `components.json`. `add` then copies the requested component's source there — along with any shared files it needs (like `ThemeContext.tsx`) — rewriting its imports to match your chosen paths automatically.
+`init` asks where you want components, the theme, and utilities placed in your project, and whether to use an `@/`-style import alias instead of relative imports (recommended — say yes and it wires up `tsconfig.json` for you). It writes those choices to a `components.json`. `add` then copies the requested component's source there — along with any shared files it needs (like `ThemeContext.tsx`) — rewriting its imports to match your setup automatically.
 
 The examples below assume the defaults offered by `init`:
 
@@ -49,7 +49,7 @@ The examples below assume the defaults offered by `init`:
 | `theme` | `src/theme` |
 | `utils` | `src/lib` |
 
-If you picked different paths, adjust the import paths in the examples accordingly.
+with the import alias enabled (`@` → `src`). If you picked different paths, or opted out of the alias, adjust the import paths in the examples accordingly — with the alias off, the same imports look like `../../theme/ThemeContext` (relative), still correctly rewritten either way.
 
 ---
 
@@ -58,7 +58,7 @@ If you picked different paths, adjust the import paths in the examples according
 Wrap your root component with `ThemeProvider`, exported from the theme file `rnc add` copies in. You can pass a partial theme — anything you omit falls back to the default.
 
 ```tsx
-import { ThemeProvider } from './src/theme/ThemeContext';
+import { ThemeProvider } from '@/theme/ThemeContext';
 
 export default function App() {
   return (
@@ -83,7 +83,12 @@ export default function App() {
 
 ### `rnc init`
 
-Creates `components.json` in the current directory. Prompts for three paths (components, theme, utils) and refuses to overwrite an existing config without confirmation.
+Creates `components.json` in the current directory. Prompts for three paths (components, theme, utils), and whether to use an import alias:
+
+- **Yes (recommended)** — prompts for an alias prefix (default `@`) and the directory it should point to (default `src`), writes `@/*` → `src/*` into `compilerOptions.paths` in `tsconfig.json` (creating a minimal one if you don't have one), and prints the `babel-plugin-module-resolver` snippet to add to `babel.config.js` so Metro resolves it at runtime too — `tsconfig.json` alone only helps TypeScript/your editor, not the bundler.
+- **No** — components are wired together with plain relative imports (`../../theme/ThemeContext`), no extra config needed.
+
+Refuses to overwrite an existing `components.json` without confirmation.
 
 ### `rnc add`
 
@@ -107,11 +112,15 @@ Prints every available component name and a one-line description.
     "components": "src/components/ui",
     "theme": "src/theme",
     "utils": "src/lib"
+  },
+  "importAlias": {
+    "prefix": "@",
+    "baseDir": "src"
   }
 }
 ```
 
-You can point these at wherever fits your project structure — `rnc add` reads this file to decide both where to write files and how to rewrite each copied component's internal imports.
+`aliases` controls where files are written on disk — point these at wherever fits your project structure. `importAlias` is optional; omit it (or answer "No" during `init`) to fall back to relative imports. When present, `rnc add` rewrites every copied component's internal imports as `<prefix>/<path relative to baseDir>` (e.g. `@/theme/ThemeContext`) instead of a relative path — falling back to relative for any dependency that lands outside `baseDir`.
 
 ---
 
@@ -139,7 +148,7 @@ You can point these at wherever fits your project structure — `rnc add` reads 
 Access the active theme inside your own components:
 
 ```tsx
-import { useTheme } from './src/theme/ThemeContext';
+import { useTheme } from '@/theme/ThemeContext';
 
 function MyComponent() {
   const theme = useTheme();
@@ -158,7 +167,7 @@ npx @kyaw-min-khant/rnc add button
 ```
 
 ```tsx
-import { Button } from './src/components/ui/Button';
+import { Button } from '@/components/ui/Button';
 
 <Button title="Submit" onPress={() => {}} />
 <Button title="Secondary" onPress={() => {}} variant="secondary" />
@@ -189,7 +198,7 @@ npx @kyaw-min-khant/rnc add input
 ```
 
 ```tsx
-import { Input } from './src/components/ui/Input';
+import { Input } from '@/components/ui/Input';
 
 <Input label="Email" placeholder="you@example.com" />
 <Input label="Filled" variant="filled" placeholder="..." />
@@ -226,7 +235,7 @@ npx @kyaw-min-khant/rnc add badge
 ```
 
 ```tsx
-import { Badge } from './src/components/ui/Badge';
+import { Badge } from '@/components/ui/Badge';
 
 <Badge label="New" color="primary" />
 <Badge label="Error" color="error" variant="outline" />
@@ -256,7 +265,7 @@ npx @kyaw-min-khant/rnc add dropdown
 ```
 
 ```tsx
-import { Dropdown } from './src/components/ui/Dropdown';
+import { Dropdown } from '@/components/ui/Dropdown';
 
 const options = [
   { label: 'Option A', value: 'a' },
@@ -309,7 +318,7 @@ npx @kyaw-min-khant/rnc add floating-action-button
 ```
 
 ```tsx
-import { FloatingActionButton } from './src/components/ui/FloatingActionButton';
+import { FloatingActionButton } from '@/components/ui/FloatingActionButton';
 
 // Simple FAB
 <FloatingActionButton
@@ -359,7 +368,7 @@ npx @kyaw-min-khant/rnc add skeleton
 ```
 
 ```tsx
-import { Skeleton } from './src/components/ui/Skeleton';
+import { Skeleton } from '@/components/ui/Skeleton';
 
 // Rectangular skeleton, e.g. a text line
 <Skeleton width="60%" height={16} />
@@ -388,7 +397,7 @@ npx @kyaw-min-khant/rnc add date-time-picker
 ```
 
 ```tsx
-import { DateTimePicker } from './src/components/ui/DateTimePicker';
+import { DateTimePicker } from '@/components/ui/DateTimePicker';
 
 const [date, setDate] = useState(new Date());
 
@@ -441,7 +450,7 @@ npx @kyaw-min-khant/rnc add utils
 ```
 
 ```tsx
-import { cn } from './src/lib/cn';
+import { cn } from '@/lib/cn';
 
 <View className={cn('p-4 rounded', isActive && 'bg-blue-500', className)} />
 ```

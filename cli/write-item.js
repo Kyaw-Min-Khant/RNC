@@ -16,10 +16,33 @@ function targetFileFor(cwd, config, item) {
   return path.join(targetDirFor(cwd, config, item), item.targetFileName);
 }
 
-function toImportSpecifier(fromDir, toFileNoExt) {
+function relativeImportSpecifier(fromDir, toFileNoExt) {
   let rel = path.relative(fromDir, toFileNoExt).split(path.sep).join("/");
   if (!rel.startsWith(".")) rel = "./" + rel;
   return rel;
+}
+
+/**
+ * Builds an "@/..."-style specifier for a target file when the consumer opted
+ * into an import alias, e.g. baseDir "src" + prefix "@" turns
+ * ".../src/theme/ThemeContext" into "@/theme/ThemeContext". Returns null when
+ * aliasing is off, or when the file falls outside the aliased base directory
+ * (falls back to a relative import in that case).
+ */
+function aliasImportSpecifier(cwd, config, toFileNoExt) {
+  const alias = config.importAlias;
+  if (!alias) return null;
+  const baseDir = path.join(cwd, alias.baseDir);
+  const rel = path.relative(baseDir, toFileNoExt);
+  if (rel.startsWith("..")) return null;
+  return `${alias.prefix}/${rel.split(path.sep).join("/")}`;
+}
+
+function importSpecifierFor(cwd, config, fromDir, toFileNoExt) {
+  return (
+    aliasImportSpecifier(cwd, config, toFileNoExt) ??
+    relativeImportSpecifier(fromDir, toFileNoExt)
+  );
 }
 
 /**
@@ -45,7 +68,7 @@ function writeItem(registry, key, config, cwd, { overwrite = false } = {}) {
       /\.tsx?$/,
       "",
     );
-    const newSpecifier = toImportSpecifier(targetDir, depTargetNoExt);
+    const newSpecifier = importSpecifierFor(cwd, config, targetDir, depTargetNoExt);
     content = content.split(`"${dep.originalImportPath}"`).join(`"${newSpecifier}"`);
   }
 
