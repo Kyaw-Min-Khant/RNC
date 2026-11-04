@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import {
   View,
   Text,
@@ -102,11 +102,12 @@ export function Dropdown<T = string>({
     pageX: 0,
   });
 
+  const triggerRef = useRef<React.ElementRef<typeof TouchableOpacity>>(null);
   const selectedOption = options.find((o) => o.value === value);
   const displayText = selectedOption ? selectedOption.label : placeholder;
   const onTriggerLayout = useCallback((e: LayoutChangeEvent) => {
     const { width, height } = e.nativeEvent.layout;
-    e.target.measureInWindow((x, y) => {
+    triggerRef.current?.measureInWindow((x, y) => {
       setTriggerLayout({ width, height, pageX: x, pageY: y });
     });
   }, []);
@@ -150,6 +151,7 @@ export function Dropdown<T = string>({
         </Text>
       ) : null}
       <TouchableOpacity
+        ref={triggerRef}
         onLayout={onTriggerLayout}
         onPress={open}
         disabled={disabled}

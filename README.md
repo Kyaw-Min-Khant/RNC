@@ -2,6 +2,8 @@
 
 shadcn-style React Native components with full **StyleSheet** and **NativeWind (Tailwind)** support. There's nothing to `npm install` — a CLI copies each component's source directly into your project, so you own the code and only add what you actually use. Every component is theme-aware — customize colors and roundness once via `ThemeProvider` and all components update automatically.
 
+**[Live Demo →](https://Kyaw-Min-Khant.github.io/RNC/)**
+
 ---
 
 ## Table of Contents

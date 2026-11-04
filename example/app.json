@@ -12,6 +12,13 @@
     "android": {
       "package": "com.rnc.example"
     },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "experiments": {
+      "baseUrl": "/RNC"
+    },
     "plugins": [
       "expo-font"
     ]

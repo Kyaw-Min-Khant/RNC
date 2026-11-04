@@ -4,6 +4,7 @@ example/node_modules/
 
 # Build output
 lib/
+storybook-static/
 
 # Expo
 example/.expo/

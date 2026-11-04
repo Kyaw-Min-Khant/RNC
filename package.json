@@ -17,11 +17,17 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
+    "@storybook/addon-docs": "^10.5.7",
+    "@storybook/react-vite": "^10.5.7",
     "@types/react": "^18.2.0",
     "@types/react-native": "^0.72.0",
     "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-native": "0.76.0",
-    "typescript": "^5.0.0"
+    "react-native-web": "^0.19.13",
+    "storybook": "^10.5.7",
+    "typescript": "^5.0.0",
+    "vite": "^8.2.1"
   },
   "author": "Kyaw Min Khant <kyawminkhant8237@gmail.com> (https://github.com/Kyaw-Min-Khant)",
   "license": "MIT",
@@ -33,6 +39,8 @@
     "typecheck": "tsc --noEmit",
     "example": "cd example && npm start",
     "example:android": "cd example && npx expo start --android",
-    "example:ios": "cd example && npx expo start --ios"
+    "example:ios": "cd example && npx expo start --ios",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   }
 }
